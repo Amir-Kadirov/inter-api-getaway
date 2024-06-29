@@ -16,11 +16,11 @@ if [[ -z "$PROTOC_GEN_GO" || -z "$PROTOC_GEN_GO_GRPC" ]]; then
   exit 1
 fi
 
-# Генерация кода для каждого подкаталога в папке protos
+# Генерация кода для каждого подкаталога в папке proto
 for x in $(find ${CURRENT_DIR}/proto/* -type d); do
   protoc --plugin="protoc-gen-go=${PROTOC_GEN_GO}" \
          --plugin="protoc-gen-go-grpc=${PROTOC_GEN_GO_GRPC}" \
-         -I=${x} -I=${CURRENT_DIR}/protos -I /usr/local/include \
+         -I=${x} -I=${CURRENT_DIR}/proto -I /usr/local/include \
          --go_out=${CURRENT_DIR} \
          --go-grpc_out=${CURRENT_DIR} \
          ${x}/*.proto

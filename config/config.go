@@ -20,6 +20,9 @@ type Config struct {
 	UserBranchHost string
 	UserBranchPort string
 
+	ScheduleBranchHost string
+	ScheduleBranchPort string
+
 	LogLevel string
 	HTTPPort string
 }
@@ -42,6 +45,9 @@ func Load() Config {
 
 	c.UserBranchHost = cast.ToString(getOrReturnDefault("USER_SERVICE_HOST", "localhost"))
 	c.UserBranchPort = cast.ToString(getOrReturnDefault("USER_GRPC_PORT", "8081"))
+
+	c.ScheduleBranchHost = cast.ToString(getOrReturnDefault("SCHEDULE_SERVICE_HOST", "localhost"))
+	c.ScheduleBranchPort = cast.ToString(getOrReturnDefault("SCHEDULE_GRPC_PORT", "8082"))
 
 	return c
 }

@@ -16,7 +16,7 @@ var (
 func initDeps() {
 	var err error
 	cfg = config.Load()
-	log = logger.New(cfg.LogLevel, "customer-api-gateway")
+	log = logger.New(cfg.LogLevel, "Student-api-gateway")
 
 	grpcClient, err = grpc_client.New(cfg)
 	if err != nil {

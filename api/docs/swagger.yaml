@@ -8,96 +8,136 @@ definitions:
       data: {}
       metadata: {}
     type: object
+  schedule_service.CreateStudent:
+    properties:
+      branchid:
+        type: string
+      email:
+        type: string
+      fullname:
+        type: string
+      groupId:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+    type: object
+  schedule_service.StudentPrimaryKey:
+    properties:
+      id:
+        type: string
+    type: object
+  schedule_service.UpdateStudentRequest:
+    properties:
+      branchid:
+        type: string
+      courseCount:
+        type: integer
+      email:
+        type: string
+      fullname:
+        type: string
+      groupId:
+        type: string
+      id:
+        type: string
+      paidSum:
+        type: integer
+      phone:
+        type: string
+      totalSum:
+        type: integer
+    type: object
+  user_service.AdminPrimaryKey:
+    properties:
+      id:
+        type: string
+    type: object
   user_service.BranchPrimaryKey:
     properties:
       id:
         type: string
     type: object
+  user_service.CreateAdmin:
+    properties:
+      branchid:
+        type: string
+      email:
+        type: string
+      fullname:
+        type: string
+      ieltsscore:
+        type: integer
+      password:
+        type: string
+      phone:
+        type: string
+      salary:
+        type: integer
+    type: object
   user_service.CreateBranch:
     properties:
-      active:
-        type: boolean
       address:
-        description: 'Note: Corrected spelling to "address"'
-        type: string
-      close_time:
         type: string
       location:
         allOf:
         - $ref: '#/definitions/user_service.Location'
         description: 'Note: Changed to lowercase "location"'
-      name:
+    type: object
+  user_service.CreateManager:
+    properties:
+      branchid:
         type: string
-      open_time:
+      email:
+        type: string
+      fullname:
+        type: string
+      password:
         type: string
       phone:
         type: string
+      salary:
+        type: integer
     type: object
-  user_service.CreateCustomer:
+  user_service.CreateSupportTeacher:
     properties:
-      date_of_birth:
+      branchid:
         type: string
-      gender:
+      email:
         type: string
-      gmail:
+      fullname:
         type: string
-      language:
+      ieltsattemptscount:
+        type: integer
+      ieltsscore:
+        type: integer
+      password:
         type: string
       phone:
         type: string
+      salary:
+        type: integer
     type: object
-  user_service.CreateSeller:
+  user_service.CreateTeacher:
     properties:
-      date_of_birth:
+      branchid:
         type: string
-      gmail:
+      email:
         type: string
-      name:
+      fullname:
+        type: string
+      ieltsattemptscount:
+        type: integer
+      ieltsscore:
+        type: integer
+      password:
         type: string
       phone:
         type: string
-      shop_id:
-        type: string
-    type: object
-  user_service.CreateShop:
-    properties:
-      currency:
-        type: string
-      description_en:
-        type: string
-      description_ru:
-        type: string
-      description_uz:
-        type: string
-      location:
-        $ref: '#/definitions/user_service.LocationShop'
-      name_en:
-        type: string
-      name_ru:
-        type: string
-      name_uz:
-        type: string
-      payment_types:
-        items:
-          type: string
-        type: array
-      phone:
-        type: string
-    type: object
-  user_service.CreateSystemUser:
-    properties:
-      gmail:
-        type: string
-      name:
-        type: string
-      phone:
-        type: string
-      role:
-        type: string
-    type: object
-  user_service.CustomerPrimaryKey:
-    properties:
-      id:
+      salary:
+        type: integer
+      supportteacherid:
         type: string
     type: object
   user_service.Location:
@@ -107,123 +147,618 @@ definitions:
       longitude:
         type: number
     type: object
-  user_service.LocationShop:
-    properties:
-      latitude:
-        type: number
-      longitude:
-        type: number
-    type: object
-  user_service.SellerPrimaryKey:
+  user_service.ManagerPrimaryKey:
     properties:
       id:
         type: string
     type: object
-  user_service.ShopPrimaryKey:
+  user_service.SupportTeacherPrimaryKey:
     properties:
       id:
         type: string
     type: object
-  user_service.SystemUserPrimaryKey:
+  user_service.TeacherPrimaryKey:
     properties:
       id:
         type: string
+    type: object
+  user_service.UpdateAdminRequest:
+    properties:
+      branchid:
+        type: string
+      email:
+        type: string
+      fullname:
+        type: string
+      id:
+        type: string
+      ieltsscore:
+        type: integer
+      password:
+        type: string
+      phone:
+        type: string
+      salary:
+        type: integer
     type: object
   user_service.UpdateBranchRequest:
     properties:
-      active:
-        type: boolean
       address:
-        description: 'Note: Corrected spelling to "address"'
-        type: string
-      close_time:
         type: string
       id:
         type: string
       location:
-        allOf:
-        - $ref: '#/definitions/user_service.Location'
-        description: 'Note: Changed to lowercase "location"'
-      name:
-        type: string
-      open_time:
-        type: string
-      phone:
-        type: string
+        $ref: '#/definitions/user_service.Location'
     type: object
-  user_service.UpdateCustomerRequest:
+  user_service.UpdateManagerRequest:
     properties:
-      date_of_birth:
+      branchid:
         type: string
-      gender:
+      email:
         type: string
-      gmail:
+      fullname:
         type: string
       id:
         type: string
-      language:
-        type: string
       phone:
         type: string
+      salary:
+        type: integer
     type: object
-  user_service.UpdateSellerRequest:
+  user_service.UpdateSupportTeacherRequest:
     properties:
-      date_of_birth:
+      branchid:
         type: string
-      gmail:
+      email:
+        type: string
+      fullname:
         type: string
       id:
         type: string
-      name:
+      ieltsattemptscount:
+        type: integer
+      ieltsscore:
+        type: integer
+      password:
         type: string
       phone:
         type: string
-      shop_id:
-        type: string
+      salary:
+        type: integer
     type: object
-  user_service.UpdateShopRequest:
+  user_service.UpdateTeacherRequest:
     properties:
-      currency:
+      branchid:
         type: string
-      description_en:
+      email:
         type: string
-      description_ru:
-        type: string
-      description_uz:
+      fullname:
         type: string
       id:
         type: string
-      location:
-        $ref: '#/definitions/user_service.LocationShop'
-      name_en:
-        type: string
-      name_ru:
-        type: string
-      name_uz:
-        type: string
-      payment_types:
-        items:
-          type: string
-        type: array
-      phone:
-        type: string
-    type: object
-  user_service.UpdateSystemUserRequest:
-    properties:
-      gmail:
-        type: string
-      id:
-        type: string
-      name:
+      ieltsattemptscount:
+        type: integer
+      ieltsscore:
+        type: integer
+      password:
         type: string
       phone:
         type: string
-      role:
+      salary:
+        type: integer
+      supportteacherid:
         type: string
     type: object
 info:
   contact: {}
 paths:
+  /v1/Student/create:
+    post:
+      consumes:
+      - application/json
+      description: This api creates a Student and returns its id
+      parameters:
+      - description: Student
+        in: body
+        name: Student
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.CreateStudent'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a Student
+      tags:
+      - Student
+  /v1/Student/delete:
+    delete:
+      description: This api delete a Student
+      parameters:
+      - description: Student
+        in: body
+        name: Student
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.StudentPrimaryKey'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: delete a Student
+      tags:
+      - Student
+  /v1/Student/getbyid/{id}:
+    get:
+      description: This api get by id a Student
+      parameters:
+      - description: Student Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get by id a Student
+      tags:
+      - Student
+  /v1/Student/getlist:
+    get:
+      description: This api get list a Student
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search gender
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get list a Student
+      tags:
+      - Student
+  /v1/Student/update:
+    put:
+      consumes:
+      - application/json
+      description: This API updates a Student
+      parameters:
+      - description: Student object to update
+        in: body
+        name: Student
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.UpdateStudentRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Update a Student
+      tags:
+      - Student
+  /v1/Teacher/create:
+    post:
+      consumes:
+      - application/json
+      description: This api creates a Teacher and returns its id
+      parameters:
+      - description: Teacher
+        in: body
+        name: Teacher
+        required: true
+        schema:
+          $ref: '#/definitions/user_service.CreateTeacher'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a Teacher
+      tags:
+      - Teacher
+  /v1/Teacher/delete:
+    delete:
+      description: This api delete a Teacher
+      parameters:
+      - description: Teacher
+        in: body
+        name: Teacher
+        required: true
+        schema:
+          $ref: '#/definitions/user_service.TeacherPrimaryKey'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: delete a Teacher
+      tags:
+      - Teacher
+  /v1/Teacher/getbyid/{id}:
+    get:
+      description: This api get by id a Teacher
+      parameters:
+      - description: Teacher id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get by id a Teacher
+      tags:
+      - Teacher
+  /v1/Teacher/getlist:
+    get:
+      description: This api get list a Teacher
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search gender
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get list a Teacher
+      tags:
+      - Teacher
+  /v1/Teacher/update:
+    put:
+      consumes:
+      - application/json
+      description: This API updates a Teacher
+      parameters:
+      - description: Teacher object to update
+        in: body
+        name: Teacher
+        required: true
+        schema:
+          $ref: '#/definitions/user_service.UpdateTeacherRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Update a Teacher
+      tags:
+      - Teacher
+  /v1/admin/create:
+    post:
+      consumes:
+      - application/json
+      description: This api creates a admin and returns its id
+      parameters:
+      - description: admin
+        in: body
+        name: admin
+        required: true
+        schema:
+          $ref: '#/definitions/user_service.CreateAdmin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a admin
+      tags:
+      - Admin
+  /v1/admin/delete:
+    delete:
+      description: This api delete a admin
+      parameters:
+      - description: admin
+        in: body
+        name: admin
+        required: true
+        schema:
+          $ref: '#/definitions/user_service.AdminPrimaryKey'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: delete a admin
+      tags:
+      - Admin
+  /v1/admin/getbyid/{id}:
+    get:
+      description: This api get by id a admin
+      parameters:
+      - description: System User id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get by id a admin
+      tags:
+      - Admin
+  /v1/admin/getlist:
+    get:
+      description: This api get list a admin
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search gender
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get list a admin
+      tags:
+      - Admin
+  /v1/admin/update:
+    put:
+      consumes:
+      - application/json
+      description: This API updates a admin
+      parameters:
+      - description: Admin object to update
+        in: body
+        name: admin
+        required: true
+        schema:
+          $ref: '#/definitions/user_service.UpdateAdminRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Update a admin
+      tags:
+      - Admin
   /v1/branch/create:
     post:
       consumes:
@@ -393,18 +928,18 @@ paths:
       summary: Update a Branch
       tags:
       - Branch
-  /v1/customer/create:
+  /v1/manager/create:
     post:
       consumes:
       - application/json
-      description: This api creates a customer and returns its id
+      description: This api creates a manager and returns its id
       parameters:
-      - description: customer
+      - description: manager
         in: body
-        name: customer
+        name: manager
         required: true
         schema:
-          $ref: '#/definitions/user_service.CreateCustomer'
+          $ref: '#/definitions/user_service.CreateManager'
       produces:
       - application/json
       responses:
@@ -424,19 +959,19 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.ResponseError'
-      summary: Creates a customer
+      summary: Creates a manager
       tags:
-      - Customer
-  /v1/customer/delete:
+      - Manager
+  /v1/manager/delete:
     delete:
-      description: This api delete a customer
+      description: This api delete a manager
       parameters:
-      - description: customer
+      - description: manager
         in: body
-        name: customer
+        name: manager
         required: true
         schema:
-          $ref: '#/definitions/user_service.CustomerPrimaryKey'
+          $ref: '#/definitions/user_service.ManagerPrimaryKey'
       produces:
       - application/json
       responses:
@@ -456,14 +991,14 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.ResponseError'
-      summary: delete a customer
+      summary: delete a manager
       tags:
-      - Customer
-  /v1/customer/getbyid/{id}:
+      - Manager
+  /v1/manager/getbyid/{id}:
     get:
-      description: This api get by id a customer
+      description: This api get by id a manager
       parameters:
-      - description: Customer Id
+      - description: Manager id
         in: path
         name: id
         required: true
@@ -487,12 +1022,12 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.ResponseError'
-      summary: Get by id a customer
+      summary: Get by id a manager
       tags:
-      - Customer
-  /v1/customer/getlist:
+      - Manager
+  /v1/manager/getlist:
     get:
-      description: This api get list a customer
+      description: This api get list a manager
       parameters:
       - description: Limit
         in: query
@@ -525,21 +1060,21 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.ResponseError'
-      summary: Get list a customer
+      summary: Get list a manager
       tags:
-      - Customer
-  /v1/customer/update:
+      - Manager
+  /v1/manager/update:
     put:
       consumes:
       - application/json
-      description: This API updates a customer
+      description: This API updates a manager
       parameters:
-      - description: Customer object to update
+      - description: Manager object to update
         in: body
-        name: customer
+        name: manager
         required: true
         schema:
-          $ref: '#/definitions/user_service.UpdateCustomerRequest'
+          $ref: '#/definitions/user_service.UpdateManagerRequest'
       produces:
       - application/json
       responses:
@@ -559,21 +1094,21 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.ResponseError'
-      summary: Update a customer
+      summary: Update a manager
       tags:
-      - Customer
-  /v1/seller/create:
+      - Manager
+  /v1/supportteacher/create:
     post:
       consumes:
       - application/json
-      description: This api creates a seller and returns its id
+      description: This api creates a supportteacher and returns its id
       parameters:
-      - description: seller
+      - description: supportteacher
         in: body
-        name: seller
+        name: supportteacher
         required: true
         schema:
-          $ref: '#/definitions/user_service.CreateSeller'
+          $ref: '#/definitions/user_service.CreateSupportTeacher'
       produces:
       - application/json
       responses:
@@ -593,19 +1128,19 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.ResponseError'
-      summary: Creates a seller
+      summary: Creates a supportteacher
       tags:
-      - Seller
-  /v1/seller/delete:
+      - SupportTeacher
+  /v1/supportteacher/delete:
     delete:
-      description: This api delete a seller
+      description: This api delete a supportteacher
       parameters:
-      - description: seller
+      - description: supportteacher
         in: body
-        name: seller
+        name: supportteacher
         required: true
         schema:
-          $ref: '#/definitions/user_service.SellerPrimaryKey'
+          $ref: '#/definitions/user_service.SupportTeacherPrimaryKey'
       produces:
       - application/json
       responses:
@@ -625,350 +1160,12 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.ResponseError'
-      summary: delete a seller
+      summary: delete a supportteacher
       tags:
-      - Seller
-  /v1/seller/getbyid/{id}:
+      - SupportTeacher
+  /v1/supportteacher/getbyid/{id}:
     get:
-      description: This api get by id a seller
-      parameters:
-      - description: Seller id
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: Get by id a seller
-      tags:
-      - Seller
-  /v1/seller/getlist:
-    get:
-      description: This api get list a seller
-      parameters:
-      - description: Limit
-        in: query
-        name: limit
-        type: integer
-      - description: Offset
-        in: query
-        name: offset
-        type: integer
-      - description: Search gender
-        in: query
-        name: search
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: Get list a seller
-      tags:
-      - Seller
-  /v1/seller/update:
-    put:
-      consumes:
-      - application/json
-      description: This API updates a seller
-      parameters:
-      - description: Seller object to update
-        in: body
-        name: seller
-        required: true
-        schema:
-          $ref: '#/definitions/user_service.UpdateSellerRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: Update a seller
-      tags:
-      - Seller
-  /v1/shop/create:
-    post:
-      consumes:
-      - application/json
-      description: This api creates a shop and returns its id
-      parameters:
-      - description: shop
-        in: body
-        name: shop
-        required: true
-        schema:
-          $ref: '#/definitions/user_service.CreateShop'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: Creates a shop
-      tags:
-      - Shop
-  /v1/shop/delete:
-    delete:
-      description: This api delete a shop
-      parameters:
-      - description: shop
-        in: body
-        name: shop
-        required: true
-        schema:
-          $ref: '#/definitions/user_service.ShopPrimaryKey'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: delete a shop
-      tags:
-      - Shop
-  /v1/shop/getbyid/{id}:
-    get:
-      description: This api get by id a shop
-      parameters:
-      - description: Shop id
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: Get by id a shop
-      tags:
-      - Shop
-  /v1/shop/getlist:
-    get:
-      description: This api get list a shop
-      parameters:
-      - description: Limit
-        in: query
-        name: limit
-        type: integer
-      - description: Offset
-        in: query
-        name: offset
-        type: integer
-      - description: Search gender
-        in: query
-        name: search
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: Get list a shop
-      tags:
-      - Shop
-  /v1/shop/update:
-    put:
-      consumes:
-      - application/json
-      description: This API updates a shop
-      parameters:
-      - description: Shop object to update
-        in: body
-        name: shop
-        required: true
-        schema:
-          $ref: '#/definitions/user_service.UpdateShopRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: Update a shop
-      tags:
-      - Shop
-  /v1/system-user/create:
-    post:
-      consumes:
-      - application/json
-      description: This api creates a system-user and returns its id
-      parameters:
-      - description: system-user
-        in: body
-        name: system-user
-        required: true
-        schema:
-          $ref: '#/definitions/user_service.CreateSystemUser'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: Creates a system-user
-      tags:
-      - SystemUser
-  /v1/system-user/delete:
-    delete:
-      description: This api delete a system-user
-      parameters:
-      - description: system-user
-        in: body
-        name: system-user
-        required: true
-        schema:
-          $ref: '#/definitions/user_service.SystemUserPrimaryKey'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: delete a system-user
-      tags:
-      - SystemUser
-  /v1/system-user/getbyid/{id}:
-    get:
-      description: This api get by id a system-user
+      description: This api get by id a supportteacher
       parameters:
       - description: System User id
         in: path
@@ -994,12 +1191,12 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.ResponseError'
-      summary: Get by id a system-user
+      summary: Get by id a supportteacher
       tags:
-      - SystemUser
-  /v1/system-user/getlist:
+      - SupportTeacher
+  /v1/supportteacher/getlist:
     get:
-      description: This api get list a system-user
+      description: This api get list a supportteacher
       parameters:
       - description: Limit
         in: query
@@ -1032,21 +1229,21 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.ResponseError'
-      summary: Get list a system-user
+      summary: Get list a supportteacher
       tags:
-      - SystemUser
-  /v1/system-user/update:
+      - SupportTeacher
+  /v1/supportteacher/update:
     put:
       consumes:
       - application/json
-      description: This API updates a system-user
+      description: This API updates a supportteacher
       parameters:
-      - description: SystemUser object to update
+      - description: SupportTeacher object to update
         in: body
-        name: system-user
+        name: supportteacher
         required: true
         schema:
-          $ref: '#/definitions/user_service.UpdateSystemUserRequest'
+          $ref: '#/definitions/user_service.UpdateSupportTeacherRequest'
       produces:
       - application/json
       responses:
@@ -1066,9 +1263,9 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/models.ResponseError'
-      summary: Update a system-user
+      summary: Update a supportteacher
       tags:
-      - SystemUser
+      - SupportTeacher
 securityDefinitions:
   ApiKeyAuth:
     in: header

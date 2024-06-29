@@ -2,8 +2,6 @@ package handler
 
 import (
 	us "backend_course/branch_api_gateway/genproto/user_service"
-	"backend_course/branch_api_gateway/pkg/validator"
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -28,11 +26,6 @@ func (h *handler) CreateBranch(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		handleGrpcErrWithDescription(c, h.log, err, "error while binding body")
-		return
-	}
-
-	if !validator.ValidatePhone(req.Phone) {
-		handleGrpcErrWithDescription(c, h.log, errors.New("error while validating phone"), "error while validating phone body")
 		return
 	}
 

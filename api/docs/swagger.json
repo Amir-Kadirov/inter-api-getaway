@@ -4,6 +4,780 @@
         "contact": {}
     },
     "paths": {
+        "/v1/Student/create": {
+            "post": {
+                "description": "This api creates a Student and returns its id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Creates a Student",
+                "parameters": [
+                    {
+                        "description": "Student",
+                        "name": "Student",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/schedule_service.CreateStudent"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/Student/delete": {
+            "delete": {
+                "description": "This api delete a Student",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "delete a Student",
+                "parameters": [
+                    {
+                        "description": "Student",
+                        "name": "Student",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/schedule_service.StudentPrimaryKey"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/Student/getbyid/{id}": {
+            "get": {
+                "description": "This api get by id a Student",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Get by id a Student",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Student Id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/Student/getlist": {
+            "get": {
+                "description": "This api get list a Student",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Get list a Student",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Offset",
+                        "name": "offset",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search gender",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/Student/update": {
+            "put": {
+                "description": "This API updates a Student",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Student"
+                ],
+                "summary": "Update a Student",
+                "parameters": [
+                    {
+                        "description": "Student object to update",
+                        "name": "Student",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/schedule_service.UpdateStudentRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/Teacher/create": {
+            "post": {
+                "description": "This api creates a Teacher and returns its id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "Creates a Teacher",
+                "parameters": [
+                    {
+                        "description": "Teacher",
+                        "name": "Teacher",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_service.CreateTeacher"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/Teacher/delete": {
+            "delete": {
+                "description": "This api delete a Teacher",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "delete a Teacher",
+                "parameters": [
+                    {
+                        "description": "Teacher",
+                        "name": "Teacher",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_service.TeacherPrimaryKey"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/Teacher/getbyid/{id}": {
+            "get": {
+                "description": "This api get by id a Teacher",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "Get by id a Teacher",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Teacher id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/Teacher/getlist": {
+            "get": {
+                "description": "This api get list a Teacher",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "Get list a Teacher",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Offset",
+                        "name": "offset",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search gender",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/Teacher/update": {
+            "put": {
+                "description": "This API updates a Teacher",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Teacher"
+                ],
+                "summary": "Update a Teacher",
+                "parameters": [
+                    {
+                        "description": "Teacher object to update",
+                        "name": "Teacher",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_service.UpdateTeacherRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/admin/create": {
+            "post": {
+                "description": "This api creates a admin and returns its id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Creates a admin",
+                "parameters": [
+                    {
+                        "description": "admin",
+                        "name": "admin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_service.CreateAdmin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/admin/delete": {
+            "delete": {
+                "description": "This api delete a admin",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "delete a admin",
+                "parameters": [
+                    {
+                        "description": "admin",
+                        "name": "admin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_service.AdminPrimaryKey"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/admin/getbyid/{id}": {
+            "get": {
+                "description": "This api get by id a admin",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Get by id a admin",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "System User id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/admin/getlist": {
+            "get": {
+                "description": "This api get list a admin",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Get list a admin",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Offset",
+                        "name": "offset",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search gender",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/admin/update": {
+            "put": {
+                "description": "This API updates a admin",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Update a admin",
+                "parameters": [
+                    {
+                        "description": "Admin object to update",
+                        "name": "admin",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user_service.UpdateAdminRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseSuccess"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ResponseError"
+                        }
+                    }
+                }
+            }
+        },
         "/v1/branch/create": {
             "post": {
                 "description": "This api creates a Branch and returns its id",
@@ -262,9 +1036,9 @@
                 }
             }
         },
-        "/v1/customer/create": {
+        "/v1/manager/create": {
             "post": {
-                "description": "This api creates a customer and returns its id",
+                "description": "This api creates a manager and returns its id",
                 "consumes": [
                     "application/json"
                 ],
@@ -272,17 +1046,17 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Customer"
+                    "Manager"
                 ],
-                "summary": "Creates a customer",
+                "summary": "Creates a manager",
                 "parameters": [
                     {
-                        "description": "customer",
-                        "name": "customer",
+                        "description": "manager",
+                        "name": "manager",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/user_service.CreateCustomer"
+                            "$ref": "#/definitions/user_service.CreateManager"
                         }
                     }
                 ],
@@ -314,24 +1088,24 @@
                 }
             }
         },
-        "/v1/customer/delete": {
+        "/v1/manager/delete": {
             "delete": {
-                "description": "This api delete a customer",
+                "description": "This api delete a manager",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "Customer"
+                    "Manager"
                 ],
-                "summary": "delete a customer",
+                "summary": "delete a manager",
                 "parameters": [
                     {
-                        "description": "customer",
-                        "name": "customer",
+                        "description": "manager",
+                        "name": "manager",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/user_service.CustomerPrimaryKey"
+                            "$ref": "#/definitions/user_service.ManagerPrimaryKey"
                         }
                     }
                 ],
@@ -363,20 +1137,20 @@
                 }
             }
         },
-        "/v1/customer/getbyid/{id}": {
+        "/v1/manager/getbyid/{id}": {
             "get": {
-                "description": "This api get by id a customer",
+                "description": "This api get by id a manager",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "Customer"
+                    "Manager"
                 ],
-                "summary": "Get by id a customer",
+                "summary": "Get by id a manager",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Customer Id",
+                        "description": "Manager id",
                         "name": "id",
                         "in": "path",
                         "required": true
@@ -410,16 +1184,16 @@
                 }
             }
         },
-        "/v1/customer/getlist": {
+        "/v1/manager/getlist": {
             "get": {
-                "description": "This api get list a customer",
+                "description": "This api get list a manager",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "Customer"
+                    "Manager"
                 ],
-                "summary": "Get list a customer",
+                "summary": "Get list a manager",
                 "parameters": [
                     {
                         "type": "integer",
@@ -468,9 +1242,9 @@
                 }
             }
         },
-        "/v1/customer/update": {
+        "/v1/manager/update": {
             "put": {
-                "description": "This API updates a customer",
+                "description": "This API updates a manager",
                 "consumes": [
                     "application/json"
                 ],
@@ -478,17 +1252,17 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Customer"
+                    "Manager"
                 ],
-                "summary": "Update a customer",
+                "summary": "Update a manager",
                 "parameters": [
                     {
-                        "description": "Customer object to update",
-                        "name": "customer",
+                        "description": "Manager object to update",
+                        "name": "manager",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/user_service.UpdateCustomerRequest"
+                            "$ref": "#/definitions/user_service.UpdateManagerRequest"
                         }
                     }
                 ],
@@ -520,9 +1294,9 @@
                 }
             }
         },
-        "/v1/seller/create": {
+        "/v1/supportteacher/create": {
             "post": {
-                "description": "This api creates a seller and returns its id",
+                "description": "This api creates a supportteacher and returns its id",
                 "consumes": [
                     "application/json"
                 ],
@@ -530,17 +1304,17 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Seller"
+                    "SupportTeacher"
                 ],
-                "summary": "Creates a seller",
+                "summary": "Creates a supportteacher",
                 "parameters": [
                     {
-                        "description": "seller",
-                        "name": "seller",
+                        "description": "supportteacher",
+                        "name": "supportteacher",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/user_service.CreateSeller"
+                            "$ref": "#/definitions/user_service.CreateSupportTeacher"
                         }
                     }
                 ],
@@ -572,24 +1346,24 @@
                 }
             }
         },
-        "/v1/seller/delete": {
+        "/v1/supportteacher/delete": {
             "delete": {
-                "description": "This api delete a seller",
+                "description": "This api delete a supportteacher",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "Seller"
+                    "SupportTeacher"
                 ],
-                "summary": "delete a seller",
+                "summary": "delete a supportteacher",
                 "parameters": [
                     {
-                        "description": "seller",
-                        "name": "seller",
+                        "description": "supportteacher",
+                        "name": "supportteacher",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/user_service.SellerPrimaryKey"
+                            "$ref": "#/definitions/user_service.SupportTeacherPrimaryKey"
                         }
                     }
                 ],
@@ -621,532 +1395,16 @@
                 }
             }
         },
-        "/v1/seller/getbyid/{id}": {
+        "/v1/supportteacher/getbyid/{id}": {
             "get": {
-                "description": "This api get by id a seller",
+                "description": "This api get by id a supportteacher",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "Seller"
+                    "SupportTeacher"
                 ],
-                "summary": "Get by id a seller",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Seller id",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseSuccess"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/seller/getlist": {
-            "get": {
-                "description": "This api get list a seller",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Seller"
-                ],
-                "summary": "Get list a seller",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Offset",
-                        "name": "offset",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Search gender",
-                        "name": "search",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseSuccess"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/seller/update": {
-            "put": {
-                "description": "This API updates a seller",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Seller"
-                ],
-                "summary": "Update a seller",
-                "parameters": [
-                    {
-                        "description": "Seller object to update",
-                        "name": "seller",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/user_service.UpdateSellerRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseSuccess"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/shop/create": {
-            "post": {
-                "description": "This api creates a shop and returns its id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Shop"
-                ],
-                "summary": "Creates a shop",
-                "parameters": [
-                    {
-                        "description": "shop",
-                        "name": "shop",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/user_service.CreateShop"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseSuccess"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/shop/delete": {
-            "delete": {
-                "description": "This api delete a shop",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Shop"
-                ],
-                "summary": "delete a shop",
-                "parameters": [
-                    {
-                        "description": "shop",
-                        "name": "shop",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/user_service.ShopPrimaryKey"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseSuccess"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/shop/getbyid/{id}": {
-            "get": {
-                "description": "This api get by id a shop",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Shop"
-                ],
-                "summary": "Get by id a shop",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Shop id",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseSuccess"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/shop/getlist": {
-            "get": {
-                "description": "This api get list a shop",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Shop"
-                ],
-                "summary": "Get list a shop",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Limit",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "Offset",
-                        "name": "offset",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "Search gender",
-                        "name": "search",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseSuccess"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/shop/update": {
-            "put": {
-                "description": "This API updates a shop",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Shop"
-                ],
-                "summary": "Update a shop",
-                "parameters": [
-                    {
-                        "description": "Shop object to update",
-                        "name": "shop",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/user_service.UpdateShopRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseSuccess"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/system-user/create": {
-            "post": {
-                "description": "This api creates a system-user and returns its id",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "SystemUser"
-                ],
-                "summary": "Creates a system-user",
-                "parameters": [
-                    {
-                        "description": "system-user",
-                        "name": "system-user",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/user_service.CreateSystemUser"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseSuccess"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/system-user/delete": {
-            "delete": {
-                "description": "This api delete a system-user",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "SystemUser"
-                ],
-                "summary": "delete a system-user",
-                "parameters": [
-                    {
-                        "description": "system-user",
-                        "name": "system-user",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/user_service.SystemUserPrimaryKey"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseSuccess"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/models.ResponseError"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/system-user/getbyid/{id}": {
-            "get": {
-                "description": "This api get by id a system-user",
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "SystemUser"
-                ],
-                "summary": "Get by id a system-user",
+                "summary": "Get by id a supportteacher",
                 "parameters": [
                     {
                         "type": "string",
@@ -1184,16 +1442,16 @@
                 }
             }
         },
-        "/v1/system-user/getlist": {
+        "/v1/supportteacher/getlist": {
             "get": {
-                "description": "This api get list a system-user",
+                "description": "This api get list a supportteacher",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "SystemUser"
+                    "SupportTeacher"
                 ],
-                "summary": "Get list a system-user",
+                "summary": "Get list a supportteacher",
                 "parameters": [
                     {
                         "type": "integer",
@@ -1242,9 +1500,9 @@
                 }
             }
         },
-        "/v1/system-user/update": {
+        "/v1/supportteacher/update": {
             "put": {
-                "description": "This API updates a system-user",
+                "description": "This API updates a supportteacher",
                 "consumes": [
                     "application/json"
                 ],
@@ -1252,17 +1510,17 @@
                     "application/json"
                 ],
                 "tags": [
-                    "SystemUser"
+                    "SupportTeacher"
                 ],
-                "summary": "Update a system-user",
+                "summary": "Update a supportteacher",
                 "parameters": [
                     {
-                        "description": "SystemUser object to update",
-                        "name": "system-user",
+                        "description": "SupportTeacher object to update",
+                        "name": "supportteacher",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/user_service.UpdateSystemUserRequest"
+                            "$ref": "#/definitions/user_service.UpdateSupportTeacherRequest"
                         }
                     }
                 ],
@@ -1309,6 +1567,77 @@
                 "metadata": {}
             }
         },
+        "schedule_service.CreateStudent": {
+            "type": "object",
+            "properties": {
+                "branchid": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "fullname": {
+                    "type": "string"
+                },
+                "groupId": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                }
+            }
+        },
+        "schedule_service.StudentPrimaryKey": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "schedule_service.UpdateStudentRequest": {
+            "type": "object",
+            "properties": {
+                "branchid": {
+                    "type": "string"
+                },
+                "courseCount": {
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "fullname": {
+                    "type": "string"
+                },
+                "groupId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "paidSum": {
+                    "type": "integer"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "totalSum": {
+                    "type": "integer"
+                }
+            }
+        },
+        "user_service.AdminPrimaryKey": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
         "user_service.BranchPrimaryKey": {
             "type": "object",
             "properties": {
@@ -1317,17 +1646,36 @@
                 }
             }
         },
+        "user_service.CreateAdmin": {
+            "type": "object",
+            "properties": {
+                "branchid": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "fullname": {
+                    "type": "string"
+                },
+                "ieltsscore": {
+                    "type": "integer"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "salary": {
+                    "type": "integer"
+                }
+            }
+        },
         "user_service.CreateBranch": {
             "type": "object",
             "properties": {
-                "active": {
-                    "type": "boolean"
-                },
                 "address": {
-                    "description": "Note: Corrected spelling to \"address\"",
-                    "type": "string"
-                },
-                "close_time": {
                     "type": "string"
                 },
                 "location": {
@@ -1337,117 +1685,89 @@
                             "$ref": "#/definitions/user_service.Location"
                         }
                     ]
-                },
-                "name": {
-                    "type": "string"
-                },
-                "open_time": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
                 }
             }
         },
-        "user_service.CreateCustomer": {
+        "user_service.CreateManager": {
             "type": "object",
             "properties": {
-                "date_of_birth": {
+                "branchid": {
                     "type": "string"
                 },
-                "gender": {
+                "email": {
                     "type": "string"
                 },
-                "gmail": {
+                "fullname": {
                     "type": "string"
                 },
-                "language": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
-                }
-            }
-        },
-        "user_service.CreateSeller": {
-            "type": "object",
-            "properties": {
-                "date_of_birth": {
-                    "type": "string"
-                },
-                "gmail": {
-                    "type": "string"
-                },
-                "name": {
+                "password": {
                     "type": "string"
                 },
                 "phone": {
                     "type": "string"
                 },
-                "shop_id": {
-                    "type": "string"
+                "salary": {
+                    "type": "integer"
                 }
             }
         },
-        "user_service.CreateShop": {
+        "user_service.CreateSupportTeacher": {
             "type": "object",
             "properties": {
-                "currency": {
+                "branchid": {
                     "type": "string"
                 },
-                "description_en": {
+                "email": {
                     "type": "string"
                 },
-                "description_ru": {
+                "fullname": {
                     "type": "string"
                 },
-                "description_uz": {
-                    "type": "string"
+                "ieltsattemptscount": {
+                    "type": "integer"
                 },
-                "location": {
-                    "$ref": "#/definitions/user_service.LocationShop"
+                "ieltsscore": {
+                    "type": "integer"
                 },
-                "name_en": {
-                    "type": "string"
-                },
-                "name_ru": {
-                    "type": "string"
-                },
-                "name_uz": {
-                    "type": "string"
-                },
-                "payment_types": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "phone": {
-                    "type": "string"
-                }
-            }
-        },
-        "user_service.CreateSystemUser": {
-            "type": "object",
-            "properties": {
-                "gmail": {
-                    "type": "string"
-                },
-                "name": {
+                "password": {
                     "type": "string"
                 },
                 "phone": {
                     "type": "string"
                 },
-                "role": {
-                    "type": "string"
+                "salary": {
+                    "type": "integer"
                 }
             }
         },
-        "user_service.CustomerPrimaryKey": {
+        "user_service.CreateTeacher": {
             "type": "object",
             "properties": {
-                "id": {
+                "branchid": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "fullname": {
+                    "type": "string"
+                },
+                "ieltsattemptscount": {
+                    "type": "integer"
+                },
+                "ieltsscore": {
+                    "type": "integer"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "salary": {
+                    "type": "integer"
+                },
+                "supportteacherid": {
                     "type": "string"
                 }
             }
@@ -1463,179 +1783,159 @@
                 }
             }
         },
-        "user_service.LocationShop": {
+        "user_service.ManagerPrimaryKey": {
             "type": "object",
             "properties": {
-                "latitude": {
-                    "type": "number"
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "user_service.SupportTeacherPrimaryKey": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "user_service.TeacherPrimaryKey": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "user_service.UpdateAdminRequest": {
+            "type": "object",
+            "properties": {
+                "branchid": {
+                    "type": "string"
                 },
-                "longitude": {
-                    "type": "number"
-                }
-            }
-        },
-        "user_service.SellerPrimaryKey": {
-            "type": "object",
-            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "fullname": {
+                    "type": "string"
+                },
                 "id": {
                     "type": "string"
-                }
-            }
-        },
-        "user_service.ShopPrimaryKey": {
-            "type": "object",
-            "properties": {
-                "id": {
+                },
+                "ieltsscore": {
+                    "type": "integer"
+                },
+                "password": {
                     "type": "string"
-                }
-            }
-        },
-        "user_service.SystemUserPrimaryKey": {
-            "type": "object",
-            "properties": {
-                "id": {
+                },
+                "phone": {
                     "type": "string"
+                },
+                "salary": {
+                    "type": "integer"
                 }
             }
         },
         "user_service.UpdateBranchRequest": {
             "type": "object",
             "properties": {
-                "active": {
-                    "type": "boolean"
-                },
                 "address": {
-                    "description": "Note: Corrected spelling to \"address\"",
-                    "type": "string"
-                },
-                "close_time": {
                     "type": "string"
                 },
                 "id": {
                     "type": "string"
                 },
                 "location": {
-                    "description": "Note: Changed to lowercase \"location\"",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/user_service.Location"
-                        }
-                    ]
-                },
-                "name": {
-                    "type": "string"
-                },
-                "open_time": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
+                    "$ref": "#/definitions/user_service.Location"
                 }
             }
         },
-        "user_service.UpdateCustomerRequest": {
+        "user_service.UpdateManagerRequest": {
             "type": "object",
             "properties": {
-                "date_of_birth": {
+                "branchid": {
                     "type": "string"
                 },
-                "gender": {
+                "email": {
                     "type": "string"
                 },
-                "gmail": {
+                "fullname": {
                     "type": "string"
                 },
                 "id": {
                     "type": "string"
                 },
-                "language": {
-                    "type": "string"
-                },
                 "phone": {
                     "type": "string"
+                },
+                "salary": {
+                    "type": "integer"
                 }
             }
         },
-        "user_service.UpdateSellerRequest": {
+        "user_service.UpdateSupportTeacherRequest": {
             "type": "object",
             "properties": {
-                "date_of_birth": {
+                "branchid": {
                     "type": "string"
                 },
-                "gmail": {
+                "email": {
+                    "type": "string"
+                },
+                "fullname": {
                     "type": "string"
                 },
                 "id": {
                     "type": "string"
                 },
-                "name": {
+                "ieltsattemptscount": {
+                    "type": "integer"
+                },
+                "ieltsscore": {
+                    "type": "integer"
+                },
+                "password": {
                     "type": "string"
                 },
                 "phone": {
                     "type": "string"
                 },
-                "shop_id": {
-                    "type": "string"
+                "salary": {
+                    "type": "integer"
                 }
             }
         },
-        "user_service.UpdateShopRequest": {
+        "user_service.UpdateTeacherRequest": {
             "type": "object",
             "properties": {
-                "currency": {
+                "branchid": {
                     "type": "string"
                 },
-                "description_en": {
+                "email": {
                     "type": "string"
                 },
-                "description_ru": {
-                    "type": "string"
-                },
-                "description_uz": {
+                "fullname": {
                     "type": "string"
                 },
                 "id": {
                     "type": "string"
                 },
-                "location": {
-                    "$ref": "#/definitions/user_service.LocationShop"
+                "ieltsattemptscount": {
+                    "type": "integer"
                 },
-                "name_en": {
-                    "type": "string"
+                "ieltsscore": {
+                    "type": "integer"
                 },
-                "name_ru": {
-                    "type": "string"
-                },
-                "name_uz": {
-                    "type": "string"
-                },
-                "payment_types": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "phone": {
-                    "type": "string"
-                }
-            }
-        },
-        "user_service.UpdateSystemUserRequest": {
-            "type": "object",
-            "properties": {
-                "gmail": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "name": {
+                "password": {
                     "type": "string"
                 },
                 "phone": {
                     "type": "string"
                 },
-                "role": {
+                "salary": {
+                    "type": "integer"
+                },
+                "supportteacherid": {
                     "type": "string"
                 }
             }

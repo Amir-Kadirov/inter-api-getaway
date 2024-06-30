@@ -1,7 +1,9 @@
 package handler
 
 import (
+	"backend_course/branch_api_gateway/genproto/schedule_service"
 	us "backend_course/branch_api_gateway/genproto/schedule_service"
+	"backend_course/branch_api_gateway/genproto/user_service"
 	"backend_course/branch_api_gateway/pkg/validator"
 	"errors"
 	"fmt"
@@ -24,23 +26,35 @@ import (
 // @Failure		500  {object}  models.ResponseError
 func (h *handler) CreateStudent(c *gin.Context) {
 	req := &us.CreateStudent{}
-	
+
 	if err := c.ShouldBindJSON(&req); err != nil {
 		handleGrpcErrWithDescription(c, h.log, err, "error while binding body")
 		return
 	}
 
-	if !validator.ValidatePhone(req.Phone) {
-		handleGrpcErrWithDescription(c, h.log, errors.New("error while validating phone"),"wrong phone")
+	_, err := h.grpcClient.GroupService().GetByID(c.Request.Context(), &schedule_service.GroupPrimaryKey{Id: req.GroupId})
+	if err != nil {
+		handleGrpcErrWithDescription(c, h.log, errors.New("wrong group id"), "wrong group id")
 		return
-		}
-	
+	}
+
+	_, err = h.grpcClient.BranchBranch().GetByID(c.Request.Context(), &user_service.BranchPrimaryKey{Id: req.Branchid})
+	if err != nil {
+		handleGrpcErrWithDescription(c, h.log, errors.New("wrong branch id"), "wrong branch id")
+		return
+	}
+
+	if !validator.ValidatePhone(req.Phone) {
+		handleGrpcErrWithDescription(c, h.log, errors.New("error while validating phone"), "wrong phone")
+		return
+	}
+
 	if !validator.ValidateGmail(req.Email) {
 		handleGrpcErrWithDescription(c, h.log, errors.New("error while validating gmail"), "wrong gmail")
 		return
-		}
-		
-		resp, err := h.grpcClient.StudentService().Create(c.Request.Context(), req)
+	}
+
+	resp, err := h.grpcClient.StudentService().Create(c.Request.Context(), req)
 	if err != nil {
 		fmt.Errorf("error while get create Student", err)
 		handleGrpcErrWithDescription(c, h.log, err, "error while creating Student")

@@ -1,9 +1,7 @@
 package handler
 
 import (
-	us "backend_course/branch_api_gateway/genproto/user_service"
-	"backend_course/branch_api_gateway/pkg/validator"
-	"errors"
+	us "backend_course/branch_api_gateway/genproto/schedule_service"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -11,49 +9,39 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @Router		/v1/admin/create [post]
-// @Summary		Creates a admin
-// @Description	This api creates a admin and returns its id
-// @Tags		Admin
+// @Router		/v1/journal/create [post]
+// @Summary		Creates a journal
+// @Description	This api creates a journal and returns its id
+// @Tags		Journal
 // @Accept		json
 // @Produce		json
-// @Param		admin body user_service.CreateAdmin true "admin"
+// @Param		journal body schedule_service.CreateJournal true "journal"
 // @Success		200  {object}  models.ResponseSuccess
 // @Failure		400  {object}  models.ResponseError
 // @Failure		404  {object}  models.ResponseError
 // @Failure		500  {object}  models.ResponseError
-func (h *handler) CreateAdmin(c *gin.Context) {
-	req := &us.CreateAdmin{}
+func (h *handler) CreateJournal(c *gin.Context) {
+	req := &us.CreateJournal{}
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		handleGrpcErrWithDescription(c, h.log, err, "error while binding body")
 		return
 	}
 
-	if !validator.ValidatePhone(req.Phone) {
-		handleGrpcErrWithDescription(c, h.log, errors.New("error while validating phone"), "wrong phone")
-		return
-	}
-
-	if !validator.ValidateGmail(req.Email) {
-		handleGrpcErrWithDescription(c, h.log, errors.New("error while validating gmail"), "wrong gmail")
-		return
-	}
-
-	resp, err := h.grpcClient.AdminService().Create(c.Request.Context(), req)
+	resp, err := h.grpcClient.JournalService().Create(c.Request.Context(), req)
 	if err != nil {
-		fmt.Errorf("error while get create admin", err)
-		handleGrpcErrWithDescription(c, h.log, err, "error while creating admin")
+		fmt.Errorf("error while get create journal", err)
+		handleGrpcErrWithDescription(c, h.log, err, "error while creating journal")
 		return
 	}
 
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Router		/v1/admin/getbyid/{id} [get]
-// @Summary		Get by id a admin
-// @Description	This api get by id a admin
-// @Tags		Admin
+// @Router		/v1/journal/getbyid/{id} [get]
+// @Summary		Get by id a journal
+// @Description	This api get by id a journal
+// @Tags		Journal
 // Accept		json
 // @Produce		json
 // @Param		id path string true "System User id"
@@ -61,11 +49,11 @@ func (h *handler) CreateAdmin(c *gin.Context) {
 // @Failure		400  {object}  models.ResponseError
 // @Failure		404  {object}  models.ResponseError
 // @Failure		500  {object}  models.ResponseError
-func (h *handler) GetByIdAdmin(c *gin.Context) {
+func (h *handler) GetByIdJournal(c *gin.Context) {
 
 	id := c.Param("id")
 
-	resp, err := h.grpcClient.AdminService().GetByID(c.Request.Context(), &us.AdminPrimaryKey{Id: id})
+	resp, err := h.grpcClient.JournalService().GetByID(c.Request.Context(), &us.JournalPrimaryKey{Id: id})
 	if err != nil {
 		fmt.Errorf("error while get get by id", err)
 		handleGrpcErrWithDescription(c, h.log, err, "error while getting by id")
@@ -75,10 +63,10 @@ func (h *handler) GetByIdAdmin(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Router		/v1/admin/getlist [get]
-// @Summary		Get list a admin
-// @Description	This api get list a admin
-// @Tags		Admin
+// @Router		/v1/journal/getlist [get]
+// @Summary		Get list a journal
+// @Description	This api get list a journal
+// @Tags		Journal
 // @Produce		json
 // @Param       limit   query int64  false "Limit"
 // @Param       offset  query int64  false "Offset"
@@ -87,8 +75,8 @@ func (h *handler) GetByIdAdmin(c *gin.Context) {
 // @Failure		400  {object}  models.ResponseError
 // @Failure		404  {object}  models.ResponseError
 // @Failure		500  {object}  models.ResponseError
-func (h *handler) GetListAdmin(c *gin.Context) {
-	req := &us.GetListAdminRequest{}
+func (h *handler) GetListJournal(c *gin.Context) {
+	req := &us.GetListJournalRequest{}
 
 	limitStr := c.Query("limit")
 	offsetStr := c.Query("offset")
@@ -118,48 +106,38 @@ func (h *handler) GetListAdmin(c *gin.Context) {
 		req.Search = search
 	}
 
-	resp, err := h.grpcClient.AdminService().GetList(c.Request.Context(), req)
+	resp, err := h.grpcClient.JournalService().GetList(c.Request.Context(), req)
 	if err != nil {
 		fmt.Errorf("error while get list", err)
-		handleGrpcErrWithDescription(c, h.log, err, "error while getting list admin")
+		handleGrpcErrWithDescription(c, h.log, err, "error while getting list journal")
 		return
 	}
 
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Router		/v1/admin/update [PUT]
-// @Summary		Update a admin
-// @Description	This API updates a admin
-// @Tags		Admin
+// @Router		/v1/journal/update [PUT]
+// @Summary		Update a journal
+// @Description	This API updates a journal
+// @Tags		Journal
 // @Accept		json
 // @Produce		json
-// @Param		admin body user_service.UpdateAdminRequest true "Admin object to update"
+// @Param		journal body schedule_service.UpdateJournalRequest true "Journal object to update"
 // @Success		200  {object}  models.ResponseSuccess
 // @Failure		400  {object}  models.ResponseError
 // @Failure		404  {object}  models.ResponseError
 // @Failure		500  {object}  models.ResponseError
-func (h *handler) UpdateAdmin(c *gin.Context) {
-	req := &us.UpdateAdminRequest{}
+func (h *handler) UpdateJournal(c *gin.Context) {
+	req := &us.UpdateJournalRequest{}
 
 	if err := c.ShouldBindJSON(&req); err != nil {
-		handleGrpcErrWithDescription(c, h.log, err, "error while update admin")
+		handleGrpcErrWithDescription(c, h.log, err, "error while update journal")
 		return
 	}
 
-	if !validator.ValidatePhone(req.Phone) {
-		handleGrpcErrWithDescription(c, h.log, errors.New("error while validating phone"), "wrong phone")
-		return
-	}
-
-	if !validator.ValidateGmail(req.Email) {
-		handleGrpcErrWithDescription(c, h.log, errors.New("error while validating gmail"), "wrong gmail")
-		return
-	}
-
-	resp, err := h.grpcClient.AdminService().Update(c.Request.Context(), req)
+	resp, err := h.grpcClient.JournalService().Update(c.Request.Context(), req)
 	if err != nil {
-		fmt.Errorf("error while update admin", err)
+		fmt.Errorf("error while update journal", err)
 		handleGrpcErrWithDescription(c, h.log, err, "error while ")
 		return
 	}
@@ -167,29 +145,29 @@ func (h *handler) UpdateAdmin(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Router		/v1/admin/delete [delete]
-// @Summary		delete a admin
-// @Description	This api delete a admin
-// @Tags		Admin
+// @Router		/v1/journal/delete [delete]
+// @Summary		delete a journal
+// @Description	This api delete a journal
+// @Tags		Journal
 // Accept		json
 // @Produce		json
-// @Param		admin body user_service.AdminPrimaryKey true "admin"
+// @Param		journal body schedule_service.JournalPrimaryKey true "journal"
 // @Success		200  {object}  models.ResponseSuccess
 // @Failure		400  {object}  models.ResponseError
 // @Failure		404  {object}  models.ResponseError
 // @Failure		500  {object}  models.ResponseError
-func (h *handler) DeleteAdmin(c *gin.Context) {
-	id := &us.AdminPrimaryKey{}
+func (h *handler) DeleteJournal(c *gin.Context) {
+	id := &us.JournalPrimaryKey{}
 
 	if err := c.ShouldBindJSON(&id); err != nil {
 		handleGrpcErrWithDescription(c, h.log, err, "error while binding body")
 		return
 	}
 
-	resp, err := h.grpcClient.AdminService().Delete(c.Request.Context(), id)
+	resp, err := h.grpcClient.JournalService().Delete(c.Request.Context(), id)
 	if err != nil {
 		fmt.Errorf("error while delete", err)
-		handleGrpcErrWithDescription(c, h.log, err, "error while delete admin")
+		handleGrpcErrWithDescription(c, h.log, err, "error while delete journal")
 		return
 	}
 

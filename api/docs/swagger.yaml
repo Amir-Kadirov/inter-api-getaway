@@ -8,6 +8,67 @@ definitions:
       data: {}
       metadata: {}
     type: object
+  schedule_service.CreateAttendance:
+    properties:
+      lessonId:
+        type: string
+      status:
+        type: boolean
+      studentId:
+        type: string
+    type: object
+  schedule_service.CreateEvent:
+    properties:
+      branchId:
+        type: string
+      day:
+        type: string
+      starttime:
+        type: string
+      topic:
+        type: string
+    type: object
+  schedule_service.CreateGroup:
+    properties:
+      branchid:
+        type: string
+      supportTeacherId:
+        type: string
+      teacherId:
+        type: string
+      type:
+        type: string
+    type: object
+  schedule_service.CreateGroupMany:
+    properties:
+      groupId:
+        type: string
+      journalId:
+        type: string
+      scheduleId:
+        type: string
+    type: object
+  schedule_service.CreateJournal:
+    properties:
+      from:
+        type: string
+      to:
+        type: string
+    type: object
+  schedule_service.CreateLesson:
+    properties:
+      name:
+        type: string
+    type: object
+  schedule_service.CreateSchedule:
+    properties:
+      endTime:
+        type: string
+      lessonId:
+        type: string
+      startTime:
+        type: string
+    type: object
   schedule_service.CreateStudent:
     properties:
       branchid:
@@ -23,9 +84,113 @@ definitions:
       phone:
         type: string
     type: object
+  schedule_service.CreateTask:
+    properties:
+      deadline:
+        type: string
+      label:
+        type: string
+      lessonId:
+        type: string
+    type: object
+  schedule_service.DoTaskReq:
+    properties:
+      doTask:
+        type: string
+      id:
+        type: string
+    type: object
+  schedule_service.EventPrimaryKey:
+    properties:
+      id:
+        type: string
+    type: object
+  schedule_service.GroupPrimaryKey:
+    properties:
+      id:
+        type: string
+    type: object
+  schedule_service.JournalPrimaryKey:
+    properties:
+      id:
+        type: string
+    type: object
+  schedule_service.LessonPrimaryKey:
+    properties:
+      id:
+        type: string
+    type: object
+  schedule_service.RegisterEv:
+    properties:
+      eventId:
+        type: string
+      studentId:
+        type: string
+    type: object
+  schedule_service.SchedulePrimaryKey:
+    properties:
+      id:
+        type: string
+    type: object
   schedule_service.StudentPrimaryKey:
     properties:
       id:
+        type: string
+    type: object
+  schedule_service.TaskPrimaryKey:
+    properties:
+      id:
+        type: string
+    type: object
+  schedule_service.UpdateEventRequest:
+    properties:
+      branchId:
+        type: string
+      day:
+        type: string
+      id:
+        type: string
+      starttime:
+        type: string
+      topic:
+        type: string
+    type: object
+  schedule_service.UpdateGroupRequest:
+    properties:
+      branchid:
+        type: string
+      supportTeacherId:
+        type: string
+      teacherId:
+        type: string
+      type:
+        type: string
+    type: object
+  schedule_service.UpdateJournalRequest:
+    properties:
+      from:
+        type: string
+      id:
+        type: string
+      to:
+        type: string
+    type: object
+  schedule_service.UpdateLessonRequest:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  schedule_service.UpdateScheduleRequest:
+    properties:
+      endTime:
+        type: string
+      id:
+        type: string
+      lessonId:
+        type: string
+      startTime:
         type: string
     type: object
   schedule_service.UpdateStudentRequest:
@@ -47,6 +212,19 @@ definitions:
       phone:
         type: string
       totalSum:
+        type: integer
+    type: object
+  schedule_service.UpdateTask:
+    properties:
+      deadline:
+        type: string
+      id:
+        type: string
+      label:
+        type: string
+      lessonId:
+        type: string
+      score:
         type: integer
     type: object
   user_service.AdminPrimaryKey:
@@ -421,175 +599,6 @@ paths:
       summary: Update a Student
       tags:
       - Student
-  /v1/Teacher/create:
-    post:
-      consumes:
-      - application/json
-      description: This api creates a Teacher and returns its id
-      parameters:
-      - description: Teacher
-        in: body
-        name: Teacher
-        required: true
-        schema:
-          $ref: '#/definitions/user_service.CreateTeacher'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: Creates a Teacher
-      tags:
-      - Teacher
-  /v1/Teacher/delete:
-    delete:
-      description: This api delete a Teacher
-      parameters:
-      - description: Teacher
-        in: body
-        name: Teacher
-        required: true
-        schema:
-          $ref: '#/definitions/user_service.TeacherPrimaryKey'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: delete a Teacher
-      tags:
-      - Teacher
-  /v1/Teacher/getbyid/{id}:
-    get:
-      description: This api get by id a Teacher
-      parameters:
-      - description: Teacher id
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: Get by id a Teacher
-      tags:
-      - Teacher
-  /v1/Teacher/getlist:
-    get:
-      description: This api get list a Teacher
-      parameters:
-      - description: Limit
-        in: query
-        name: limit
-        type: integer
-      - description: Offset
-        in: query
-        name: offset
-        type: integer
-      - description: Search gender
-        in: query
-        name: search
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: Get list a Teacher
-      tags:
-      - Teacher
-  /v1/Teacher/update:
-    put:
-      consumes:
-      - application/json
-      description: This API updates a Teacher
-      parameters:
-      - description: Teacher object to update
-        in: body
-        name: Teacher
-        required: true
-        schema:
-          $ref: '#/definitions/user_service.UpdateTeacherRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/models.ResponseSuccess'
-        "400":
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-        "500":
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/models.ResponseError'
-      summary: Update a Teacher
-      tags:
-      - Teacher
   /v1/admin/create:
     post:
       consumes:
@@ -759,6 +768,109 @@ paths:
       summary: Update a admin
       tags:
       - Admin
+  /v1/attendance/create:
+    post:
+      consumes:
+      - application/json
+      description: This api creates a Attendance and returns its id
+      parameters:
+      - description: Attendance
+        in: body
+        name: Attendance
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.CreateAttendance'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a Attendance
+      tags:
+      - Attendance
+  /v1/attendance/getbyid/{id}:
+    get:
+      description: This api get by id a Attendance
+      parameters:
+      - description: Student id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get by id a Attendance
+      tags:
+      - Attendance
+  /v1/attendance/getlist:
+    get:
+      description: This api get list a attendance
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search student by id
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get list a attendance
+      tags:
+      - Attendance
   /v1/branch/create:
     post:
       consumes:
@@ -928,6 +1040,750 @@ paths:
       summary: Update a Branch
       tags:
       - Branch
+  /v1/event/create:
+    post:
+      consumes:
+      - application/json
+      description: This api creates a Event and returns its id
+      parameters:
+      - description: Event
+        in: body
+        name: Event
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.CreateEvent'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a Event
+      tags:
+      - Event
+  /v1/event/delete:
+    delete:
+      description: This api delete a Event
+      parameters:
+      - description: Event
+        in: body
+        name: Event
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.EventPrimaryKey'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: delete a Event
+      tags:
+      - Event
+  /v1/event/getbyid/{id}:
+    get:
+      description: This api get by id a Event
+      parameters:
+      - description: Event id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get by id a Event
+      tags:
+      - Event
+  /v1/event/getlist:
+    get:
+      description: This api get list a event
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search gender
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get list a event
+      tags:
+      - Event
+  /v1/event/registerevent:
+    post:
+      consumes:
+      - application/json
+      description: This api register event
+      parameters:
+      - description: Event
+        in: body
+        name: Register-Event
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.RegisterEv'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Registers to Event
+      tags:
+      - Event
+  /v1/event/updateevent:
+    put:
+      consumes:
+      - application/json
+      description: This API updates a Event
+      parameters:
+      - description: Event object to update
+        in: body
+        name: Event
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.UpdateEventRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Update a Event
+      tags:
+      - Event
+  /v1/group/create:
+    post:
+      consumes:
+      - application/json
+      description: This api creates a Group and returns its id
+      parameters:
+      - description: Group
+        in: body
+        name: Group
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.CreateGroup'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a Group
+      tags:
+      - Group
+  /v1/group/delete:
+    delete:
+      description: This api delete a Group
+      parameters:
+      - description: Group
+        in: body
+        name: Group
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.GroupPrimaryKey'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: delete a Group
+      tags:
+      - Group
+  /v1/group/getbyid/{id}:
+    get:
+      description: This api get by id a Group
+      parameters:
+      - description: Group id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get by id a Group
+      tags:
+      - Group
+  /v1/group/getlist:
+    get:
+      description: This api get list a group
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search gender
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get list a group
+      tags:
+      - Group
+  /v1/group/updategroup:
+    put:
+      consumes:
+      - application/json
+      description: This API updates a Group
+      parameters:
+      - description: Group object to update
+        in: body
+        name: Group
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.UpdateGroupRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Update a Group
+      tags:
+      - Group
+  /v1/groupmany/create:
+    post:
+      consumes:
+      - application/json
+      description: This api creates a GroupMany and returns its id
+      parameters:
+      - description: GroupMany
+        in: body
+        name: GroupMany
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.CreateGroupMany'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a GroupMany
+      tags:
+      - GroupMany
+  /v1/journal/create:
+    post:
+      consumes:
+      - application/json
+      description: This api creates a journal and returns its id
+      parameters:
+      - description: journal
+        in: body
+        name: journal
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.CreateJournal'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a journal
+      tags:
+      - Journal
+  /v1/journal/delete:
+    delete:
+      description: This api delete a journal
+      parameters:
+      - description: journal
+        in: body
+        name: journal
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.JournalPrimaryKey'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: delete a journal
+      tags:
+      - Journal
+  /v1/journal/getbyid/{id}:
+    get:
+      description: This api get by id a journal
+      parameters:
+      - description: System User id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get by id a journal
+      tags:
+      - Journal
+  /v1/journal/getlist:
+    get:
+      description: This api get list a journal
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search gender
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get list a journal
+      tags:
+      - Journal
+  /v1/journal/update:
+    put:
+      consumes:
+      - application/json
+      description: This API updates a journal
+      parameters:
+      - description: Journal object to update
+        in: body
+        name: journal
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.UpdateJournalRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Update a journal
+      tags:
+      - Journal
+  /v1/lesson/create:
+    post:
+      consumes:
+      - application/json
+      description: This api creates a Lesson and returns its id
+      parameters:
+      - description: Lesson
+        in: body
+        name: Lesson
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.CreateLesson'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a Lesson
+      tags:
+      - Lesson
+  /v1/lesson/delete:
+    delete:
+      description: This api delete a Lesson
+      parameters:
+      - description: Lesson
+        in: body
+        name: Lesson
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.LessonPrimaryKey'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: delete a Lesson
+      tags:
+      - Lesson
+  /v1/lesson/getbyid/{id}:
+    get:
+      description: This api get by id a Lesson
+      parameters:
+      - description: Lesson id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get by id a Lesson
+      tags:
+      - Lesson
+  /v1/lesson/getlist:
+    get:
+      description: This api get list a lesson
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search gender
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get list a lesson
+      tags:
+      - Lesson
+  /v1/lesson/updatelesson:
+    put:
+      consumes:
+      - application/json
+      description: This API updates a Lesson
+      parameters:
+      - description: Lesson object to update
+        in: body
+        name: Lesson
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.UpdateLessonRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Update a Lesson
+      tags:
+      - Lesson
   /v1/manager/create:
     post:
       consumes:
@@ -1097,6 +1953,352 @@ paths:
       summary: Update a manager
       tags:
       - Manager
+  /v1/report/admin:
+    get:
+      description: This api report a Admin
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search branch id
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: report a Admin
+      tags:
+      - Report
+  /v1/report/schedulemonth:
+    get:
+      description: This api get report schedule
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Gets a schodule for month
+      tags:
+      - Report
+  /v1/report/student:
+    get:
+      description: This api report a Student
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search branch id
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: report a Student
+      tags:
+      - Report
+  /v1/report/supportteacher:
+    get:
+      description: This api report a SupportTeacher
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search branch id
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: report a SupportTeacher
+      tags:
+      - Report
+  /v1/report/teacher:
+    get:
+      description: This api report a Teacher
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search branch id
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: report a Teacher
+      tags:
+      - Report
+  /v1/schedule/create:
+    post:
+      consumes:
+      - application/json
+      description: This api creates a Schedule and returns its id
+      parameters:
+      - description: Schedule
+        in: body
+        name: Schedule
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.CreateSchedule'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a Schedule
+      tags:
+      - Schedule
+  /v1/schedule/delete:
+    delete:
+      description: This api delete a Schedule
+      parameters:
+      - description: Schedule
+        in: body
+        name: Schedule
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.SchedulePrimaryKey'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: delete a Schedule
+      tags:
+      - Schedule
+  /v1/schedule/getbyid/{id}:
+    get:
+      description: This api get by id a Schedule
+      parameters:
+      - description: Schedule id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get by id a Schedule
+      tags:
+      - Schedule
+  /v1/schedule/getlist:
+    get:
+      description: This api get list a schedule
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search gender
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get list a schedule
+      tags:
+      - Schedule
+  /v1/schedule/updateschedule:
+    put:
+      consumes:
+      - application/json
+      description: This API updates a Schedule
+      parameters:
+      - description: Schedule object to update
+        in: body
+        name: Schedule
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.UpdateScheduleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Update a Schedule
+      tags:
+      - Schedule
   /v1/supportteacher/create:
     post:
       consumes:
@@ -1266,6 +2468,378 @@ paths:
       summary: Update a supportteacher
       tags:
       - SupportTeacher
+  /v1/task/create:
+    post:
+      consumes:
+      - application/json
+      description: This api creates a Task and returns its id
+      parameters:
+      - description: Task
+        in: body
+        name: Task
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.CreateTask'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a Task
+      tags:
+      - Task
+  /v1/task/delete:
+    delete:
+      description: This api delete a Task
+      parameters:
+      - description: Task
+        in: body
+        name: Task
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.TaskPrimaryKey'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: delete a Task
+      tags:
+      - Task
+  /v1/task/dotask:
+    post:
+      consumes:
+      - application/json
+      description: This api do task
+      parameters:
+      - description: Task
+        in: body
+        name: Task
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.DoTaskReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a Task
+      tags:
+      - Task
+  /v1/task/getbyid/{id}:
+    get:
+      description: This api get by id a Task
+      parameters:
+      - description: Task id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get by id a Task
+      tags:
+      - Task
+  /v1/task/getlist:
+    get:
+      description: This api get list a task
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search gender
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get list a task
+      tags:
+      - Task
+  /v1/task/updatetask:
+    put:
+      consumes:
+      - application/json
+      description: This API updates a Task
+      parameters:
+      - description: Task object to update
+        in: body
+        name: Task
+        required: true
+        schema:
+          $ref: '#/definitions/schedule_service.UpdateTask'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Update a Task
+      tags:
+      - Task
+  /v1/teacher/create:
+    post:
+      consumes:
+      - application/json
+      description: This api creates a Teacher and returns its id
+      parameters:
+      - description: Teacher
+        in: body
+        name: Teacher
+        required: true
+        schema:
+          $ref: '#/definitions/user_service.CreateTeacher'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Creates a Teacher
+      tags:
+      - Teacher
+  /v1/teacher/delete:
+    delete:
+      description: This api delete a Teacher
+      parameters:
+      - description: Teacher
+        in: body
+        name: Teacher
+        required: true
+        schema:
+          $ref: '#/definitions/user_service.TeacherPrimaryKey'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: delete a Teacher
+      tags:
+      - Teacher
+  /v1/teacher/getbyid/{id}:
+    get:
+      description: This api get by id a Teacher
+      parameters:
+      - description: Teacher id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get by id a Teacher
+      tags:
+      - Teacher
+  /v1/teacher/getlist:
+    get:
+      description: This api get list a Teacher
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      - description: Search gender
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Get list a Teacher
+      tags:
+      - Teacher
+  /v1/teacher/update:
+    put:
+      consumes:
+      - application/json
+      description: This API updates a Teacher
+      parameters:
+      - description: Teacher object to update
+        in: body
+        name: Teacher
+        required: true
+        schema:
+          $ref: '#/definitions/user_service.UpdateTeacherRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ResponseSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ResponseError'
+      summary: Update a Teacher
+      tags:
+      - Teacher
 securityDefinitions:
   ApiKeyAuth:
     in: header

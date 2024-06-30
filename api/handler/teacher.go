@@ -11,7 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @Router		/v1/Teacher/create [post]
+// @Router		/v1/teacher/create [post]
 // @Summary		Creates a Teacher
 // @Description	This api creates a Teacher and returns its id
 // @Tags		Teacher
@@ -50,7 +50,7 @@ func (h *handler) CreateTeacher(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Router		/v1/Teacher/getbyid/{id} [get]
+// @Router		/v1/teacher/getbyid/{id} [get]
 // @Summary		Get by id a Teacher
 // @Description	This api get by id a Teacher
 // @Tags		Teacher
@@ -73,7 +73,7 @@ func (h *handler) GetByIdTeacher(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Router		/v1/Teacher/getlist [get]
+// @Router		/v1/teacher/getlist [get]
 // @Summary		Get list a Teacher
 // @Description	This api get list a Teacher
 // @Tags		Teacher
@@ -126,7 +126,7 @@ func (h *handler) GetListTeacher(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Router		/v1/Teacher/update [put]
+// @Router		/v1/teacher/update [put]
 // @Summary		Update a Teacher
 // @Description	This API updates a Teacher
 // @Tags		Teacher
@@ -165,7 +165,7 @@ func (h *handler) UpdateTeacher(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Router		/v1/Teacher/delete [delete]
+// @Router		/v1/teacher/delete [delete]
 // @Summary		delete a Teacher
 // @Description	This api delete a Teacher
 // @Tags		Teacher

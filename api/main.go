@@ -50,6 +50,8 @@ func New(cnf Config) *gin.Engine {
 		c.JSON(http.StatusOK, gin.H{"data": "Api gateway"})
 	})
 
+
+	// User Service
 	r.POST("/v1/branch/create", handler.CreateBranch)
 	r.GET("/v1/branch/getbyid/:id", handler.GetByID)
 	r.GET("/v1/branch/getlist", handler.GetListBranch)
@@ -67,6 +69,7 @@ func New(cnf Config) *gin.Engine {
 	r.GET("/v1/admin/getlist", handler.GetListAdmin)
 	r.PUT("/v1/admin/update", handler.UpdateAdmin)
 	r.DELETE("/v1/admin/delete", handler.DeleteAdmin)
+	r.GET("/v1/admin/report",handler.AdminReport)
 
 	r.POST("/v1/manager/create", handler.CreateManager)
 	r.GET("/v1/manager/getbyid/:id", handler.GetByIdManager)
@@ -85,6 +88,58 @@ func New(cnf Config) *gin.Engine {
 	r.GET("/v1/supportteacher/getlist", handler.GetListSupportTeacher)
 	r.PUT("/v1/supportteacher/update", handler.UpdateSupportTeacher)
 	r.DELETE("/v1/supportteacher/delete", handler.DeleteSupportTeacher)
+
+	// Schedule Service
+	r.POST("/v1/event/create", handler.CreateEvent)
+	r.GET("/v1/event/getbyid/:id", handler.GetByIDEvent)
+	r.GET("/v1/event/getlist", handler.GetListEvent)
+	r.PUT("/v1/event/update", handler.UpdateEvent)
+	r.DELETE("/v1/event/delete", handler.DeleteEvent)
+	r.POST("/v1/event/registerevent",handler.RegisterEvent)
+
+	r.POST("/v1/group/create", handler.CreateGroup)
+	r.GET("/v1/group/getbyid/:id", handler.GetByIDGroup)
+	r.GET("/v1/group/getlist", handler.GetListGroup)
+	r.PUT("/v1/group/update", handler.UpdateGroup)
+	r.DELETE("/v1/group/delete", handler.DeleteGroup)
+
+	r.POST("/v1/journal/create", handler.CreateJournal)
+	r.GET("/v1/journal/getbyid/:id", handler.GetByIdJournal)
+	r.GET("/v1/journal/getlist", handler.GetListJournal)
+	r.PUT("/v1/journal/update", handler.UpdateJournal)
+	r.DELETE("/v1/journal/delete", handler.DeleteJournal)
+
+	r.POST("/v1/lesson/create", handler.CreateLesson)
+	r.GET("/v1/lesson/getbyid/:id", handler.GetByIDLesson)
+	r.GET("/v1/lesson/getlist", handler.GetListLesson)
+	r.PUT("/v1/lesson/update", handler.UpdateLesson)
+	r.DELETE("/v1/lesson/delete", handler.DeleteLesson)
+
+	r.POST("/v1/schedule/create", handler.CreateSchedule)
+	r.GET("/v1/schedule/getbyid/:id", handler.GetByIDSchedule)
+	r.GET("/v1/schedule/getlist", handler.GetListSchedule)
+	r.PUT("/v1/schedule/update", handler.UpdateSchedule)
+	r.DELETE("/v1/schedule/delete", handler.DeleteSchedule)
+
+	r.POST("/v1/task/create", handler.CreateTask)
+	r.GET("/v1/task/getbyid/:id", handler.GetByIDTask)
+	r.GET("/v1/task/getlist", handler.GetListTask)
+	r.PUT("/v1/task/update", handler.UpdateTask)
+	r.DELETE("/v1/task/delete", handler.DeleteTask)
+	r.POST("/v1/task/dotask",handler.DoTask)
+
+	r.POST("/v1/attendance/create", handler.CreateAttendance)
+	r.GET("/v1/attendance/getbyid/:id", handler.GetByIDAttendance)
+	r.GET("/v1/attendance/getlist", handler.GetListAttendance)
+
+
+	r.POST("/v1/groupmany/create", handler.CreateGroupMany)
+
+	r.GET("/v1/report/schedulemonth",handler.ScheduleMonth)
+	r.GET("/v1/report/teacher",handler.TeacherReport)
+	r.GET("/v1/report/admin",handler.AdminReport)
+	r.GET("/v1/report/student",handler.StudentReport)
+	r.GET("/v1/report/supportteacher",handler.SupportTeacherReport)
 
 	// Shipper endpoints
 	url := ginSwagger.URL("swagger/doc.json") // The url pointing to API definition

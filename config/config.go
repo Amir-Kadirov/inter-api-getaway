@@ -14,7 +14,7 @@ const ()
 type Config struct {
 	Environment   string // develop, staging, production
 	RedisHost     string
-	RedisPort     int
+	RedisPort     string
 	RedisPassword string
 
 	UserBranchHost string
@@ -39,9 +39,10 @@ func Load() Config {
 
 	c.LogLevel = cast.ToString(getOrReturnDefault("LOG_LEVEL", "debug"))
 	c.HTTPPort = cast.ToString(getOrReturnDefault("HTTP_PORT", ":1239"))
-	c.RedisHost = cast.ToString(getOrReturnDefault("REDIS_HOST", "127.0.0.1"))
-	c.RedisPort = cast.ToInt(getOrReturnDefault("REDIS_PORT", 6379))
-	c.RedisPassword = cast.ToString(getOrReturnDefault("REDIS_PASSWORD", "3EEdwhDOfx"))
+
+	c.RedisHost = "localhost"
+	c.RedisPort = "6379"
+	c.RedisPassword = cast.ToString(getOrReturnDefault("REDIS_PASSWORD", "Amir2414"))
 
 	c.UserBranchHost = cast.ToString(getOrReturnDefault("USER_SERVICE_HOST", "localhost"))
 	c.UserBranchPort = cast.ToString(getOrReturnDefault("USER_GRPC_PORT", "8081"))

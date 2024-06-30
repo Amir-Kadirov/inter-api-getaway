@@ -1,6 +1,10 @@
 package validator
 
-import "regexp"
+import (
+	"errors"
+	"regexp"
+	"time"
+)
 
 func ValidatePhone(phone string) bool {
 	return regexp.MustCompile(`^\+998[0-9]{9}$`).MatchString(phone)
@@ -15,4 +19,17 @@ func ValidateGender(gender string) bool {
 		return false
 	}
 	return true
+}
+
+func ValidateDaySunDay(day string)  error {
+	date, err := time.Parse("2006-01-02", day)
+	if err != nil {
+		return err
+	}
+
+	if date.Weekday() != time.Sunday {
+		return errors.New("wrong day: valid only Sunday")
+	}
+
+	return nil
 }

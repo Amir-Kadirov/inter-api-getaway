@@ -1,7 +1,7 @@
 package handler
 
 import (
-	us "backend_course/branch_api_gateway/genproto/user_service"
+	us "backend_course/branch_api_gateway/genproto/schedule_service"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -9,61 +9,61 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @Router		/v1/branch/create [post]
-// @Summary		Creates a Branch
-// @Description	This api creates a Branch and returns its id
-// @Tags		Branch
+// @Router		/v1/lesson/create [post]
+// @Summary		Creates a Lesson
+// @Description	This api creates a Lesson and returns its id
+// @Tags		Lesson
 // @Accept		json
 // @Produce		json
-// @Param		Branch body user_service.CreateBranch true "Branch"
+// @Param		Lesson body schedule_service.CreateLesson true "Lesson"
 // @Success		200  {object}  models.ResponseSuccess
 // @Failure		400  {object}  models.ResponseError
 // @Failure		404  {object}  models.ResponseError
 // @Failure		500  {object}  models.ResponseError
-func (h *handler) CreateBranch(c *gin.Context) {
-	var req us.CreateBranch
+func (h *handler) CreateLesson(c *gin.Context) {
+	var req us.CreateLesson
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		handleGrpcErrWithDescription(c, h.log, err, "error while binding body")
 		return
 	}
 
-	resp, err := h.grpcClient.BranchBranch().Create(c.Request.Context(), &req)
+	resp, err := h.grpcClient.LessonService().Create(c.Request.Context(), &req)
 	if err != nil {
-		handleGrpcErrWithDescription(c, h.log, err, "error while create branch")
+		handleGrpcErrWithDescription(c, h.log, err, "error while create lesson")
 		return
 	}
 
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Router		/v1/branch/getbyid/{id} [get]	
-// @Summary		Get by id a Branch
-// @Description	This api get by id a Branch
-// @Tags		Branch
+// @Router		/v1/lesson/getbyid/{id} [get]
+// @Summary		Get by id a Lesson
+// @Description	This api get by id a Lesson
+// @Tags		Lesson
 // @Produce		json
-// @Param		id path string true "Branch id"
+// @Param		id path string true "Lesson id"
 // @Success		200  {object}  models.ResponseSuccess
 // @Failure		400  {object}  models.ResponseError
 // @Failure		404  {object}  models.ResponseError
 // @Failure		500  {object}  models.ResponseError
-func (h *handler) GetByID(c *gin.Context) {
+func (h *handler) GetByIDLesson(c *gin.Context) {
 	id := c.Param("id")
 
-	resp, err := h.grpcClient.BranchBranch().GetByID(c.Request.Context(), &us.BranchPrimaryKey{Id: id})
+	resp, err := h.grpcClient.LessonService().GetByID(c.Request.Context(), &us.LessonPrimaryKey{Id: id})
 	if err != nil {
 		fmt.Errorf("error while get by id", err)
-		handleGrpcErrWithDescription(c, h.log, err, "error while get by id branch")
+		handleGrpcErrWithDescription(c, h.log, err, "error while get by id lesson")
 		return
 	}
 
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Router		/v1/branch/getlist [get]
-// @Summary		Get list a branch
-// @Description	This api get list a branch
-// @Tags		Branch
+// @Router		/v1/lesson/getlist [get]
+// @Summary		Get list a lesson
+// @Description	This api get list a lesson
+// @Tags		Lesson
 // @Produce		json
 // @Param       limit   query int64  false "Limit"
 // @Param       offset  query int64  false "Offset"
@@ -72,8 +72,8 @@ func (h *handler) GetByID(c *gin.Context) {
 // @Failure		400  {object}  models.ResponseError
 // @Failure		404  {object}  models.ResponseError
 // @Failure		500  {object}  models.ResponseError
-func (h *handler) GetListBranch(c *gin.Context) {
-	req := &us.GetListBranchRequest{}
+func (h *handler) GetListLesson(c *gin.Context) {
+	req := &us.GetListLessonRequest{}
 
 	limitStr := c.Query("limit")
 	offsetStr := c.Query("offset")
@@ -103,68 +103,68 @@ func (h *handler) GetListBranch(c *gin.Context) {
 		req.Search = search
 	}
 
-	resp, err := h.grpcClient.BranchBranch().GetList(c.Request.Context(), req)
+	resp, err := h.grpcClient.LessonService().GetList(c.Request.Context(), req)
 	if err != nil {
 		fmt.Errorf("error while get list", err)
-		handleGrpcErrWithDescription(c, h.log, err, "error while getting list branch")
+		handleGrpcErrWithDescription(c, h.log, err, "error while getting list lesson")
 		return
 	}
 
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Router		/v1/branch/updatebranch [PUT]
-// @Summary		Update a Branch
-// @Description	This API updates a Branch
-// @Tags		Branch
+// @Router		/v1/lesson/updatelesson [PUT]
+// @Summary		Update a Lesson
+// @Description	This API updates a Lesson
+// @Tags		Lesson
 // @Accept		json
 // @Produce		json
-// @Param		Branch body user_service.UpdateBranchRequest true "Branch object to update"
+// @Param		Lesson body schedule_service.UpdateLessonRequest true "Lesson object to update"
 // @Success		200  {object}  models.ResponseSuccess
 // @Failure		400  {object}  models.ResponseError
 // @Failure		404  {object}  models.ResponseError
 // @Failure		500  {object}  models.ResponseError
-func (h *handler) Update(c *gin.Context) {
-	req := &us.UpdateBranchRequest{}
+func (h *handler) UpdateLesson(c *gin.Context) {
+	req := &us.UpdateLessonRequest{}
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		handleGrpcErrWithDescription(c, h.log, err, "error while binding binding body")
 		return
 	}
 
-	resp, err := h.grpcClient.BranchBranch().Update(c.Request.Context(), req)
+	resp, err := h.grpcClient.LessonService().Update(c.Request.Context(), req)
 	if err != nil {
-		fmt.Errorf("error while update Branch", err)
-		handleGrpcErrWithDescription(c, h.log, err, "error while updating branch")
+		fmt.Errorf("error while update Lesson", err)
+		handleGrpcErrWithDescription(c, h.log, err, "error while updating lesson")
 		return
 	}
 
 	c.JSON(http.StatusOK, resp)
 }
 
-// @Router		/v1/branch/delete [delete]
-// @Summary		delete a Branch
-// @Description	This api delete a Branch
-// @Tags		Branch
+// @Router		/v1/lesson/delete [delete]
+// @Summary		delete a Lesson
+// @Description	This api delete a Lesson
+// @Tags		Lesson
 // Accept		json
 // @Produce		json
-// @Param		Branch body user_service.BranchPrimaryKey true "Branch"
+// @Param		Lesson body schedule_service.LessonPrimaryKey true "Lesson"
 // @Success		200  {object}  models.ResponseSuccess
 // @Failure		400  {object}  models.ResponseError
 // @Failure		404  {object}  models.ResponseError
 // @Failure		500  {object}  models.ResponseError
-func (h *handler) Delete(c *gin.Context) {
-	id := &us.BranchPrimaryKey{}
+func (h *handler) DeleteLesson(c *gin.Context) {
+	id := &us.LessonPrimaryKey{}
 
 	if err := c.ShouldBindJSON(&id); err != nil {
 		handleGrpcErrWithDescription(c, h.log, err, "error while binding body")
 		return
 	}
 
-	resp, err := h.grpcClient.BranchBranch().Delete(c.Request.Context(), id)
+	resp, err := h.grpcClient.LessonService().Delete(c.Request.Context(), id)
 	if err != nil {
 		fmt.Errorf("error while get delete", err)
-		handleGrpcErrWithDescription(c, h.log, err, "error while deleting branch")
+		handleGrpcErrWithDescription(c, h.log, err, "error while deleting lesson")
 		return
 	}
 
